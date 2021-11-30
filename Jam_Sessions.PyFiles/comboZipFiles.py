@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-# replace with path to your directory
+#replace with path to your directory
 directoryR = "/Users/Rebecca 1/Desktop/Jam_Sessions/data/reactive-gases-grids/"
 reactive_data = []
 for file in os.listdir(directoryR):
@@ -21,10 +21,12 @@ directoryS = "/Users/Rebecca 1/Desktop/Jam_Sessions/data/so2-grids/"
 so2_data = []
 for file in os.listdir(directoryS):
     if file.endswith("0"):
-        files = pd.read_csv(directoryS + file, skiprows=3, sep='\t',
+        files = pd.read_table(directoryS + file, skiprows=3, delim_whitespace=True,
                             names=["so2_emissions"]) # also tried read_table
         files['filename'] = os.path.basename(file)
 
         so2_data.append(files)
 so2_data = pd.concat(so2_data)
 print(so2_data)
+# replace with path to your directory
+#so2_data.to_csv("/Users/Rebecca 1/Desktop/Jam_Sessions/data/combinedSO2Data.csv", index = False)
